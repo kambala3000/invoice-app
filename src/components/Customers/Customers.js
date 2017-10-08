@@ -2,52 +2,54 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { PageHeader, Grid, Button, Table } from 'react-bootstrap';
 
-import api from '../api';
-import InvoiceItem from './InvoiceItem';
+import api from '../../api';
+import CustomerItem from './CustomerItem';
 
-class Invoices extends Component {
+class Customers extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            invoices: []
+            customers: []
         };
     }
 
     componentDidMount() {
-        api.getInvoices().then(response => {
+        document.title = 'Customers';
+        api.getCustomerList().then(response => {
             this.setState({
-                invoices: response
+                customers: response
             });
         });
     }
 
     render() {
-        const { invoices } = this.state;
+        const { customers } = this.state;
         return (
             <Grid>
                 <PageHeader>
-                    <strong>Invoice list</strong>
+                    <strong>Customer list</strong>
                     <Button className="page-header-btn">Create</Button>
                 </PageHeader>
                 <Table responsive>
                     <thead>
                         <tr>
                             <th width="5%">#</th>
-                            <th width="35%">Customer</th>
-                            <th width="20%">Discount</th>
-                            <th width="20%">Total</th>
-                            <th width="20%" />
+                            <th width="18%">Name</th>
+                            <th width="38%">Address</th>
+                            <th width="20%">Phone number</th>
+                            <th width="19%" />
                         </tr>
                     </thead>
                     <tbody>
-                        {invoices.length > 0 &&
-                            invoices.map((item, index) => (
-                                <InvoiceItem
+                        {customers.length > 0 &&
+                            customers.map((item, index) => (
+                                <CustomerItem
                                     key={item.id}
+                                    id={item.id}
                                     num={++index}
-                                    customerId={item.customer_id}
-                                    discount={item.discount}
-                                    total={item.total}
+                                    name={item.name}
+                                    address={item.address}
+                                    phone={item.phone}
                                 />
                             ))}
                     </tbody>
@@ -57,6 +59,6 @@ class Invoices extends Component {
     }
 }
 
-Invoices.propTypes = {};
+Customers.propTypes = {};
 
-export default Invoices;
+export default Customers;

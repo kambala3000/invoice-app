@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 
-import api from '../api';
+import api from '../../api';
 
 class InvoiceItem extends Component {
     constructor(props) {
@@ -38,6 +38,7 @@ class InvoiceItem extends Component {
 }
 
 InvoiceItem.propTypes = {
+    id: PropTypes.number.isRequired,
     customerId: PropTypes.number.isRequired,
     discount: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired

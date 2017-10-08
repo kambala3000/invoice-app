@@ -22,6 +22,7 @@ class ProductItem extends Component {
 }
 
 ProductItem.propTypes = {
+    id: PropTypes.number.isRequired,
     num: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { PageHeader, Grid, Button, Table } from 'react-bootstrap';
 
-import api from '../api';
+import api from '../../api';
 import ProductItem from './ProductItem';
 
 class Products extends Component {
@@ -43,6 +43,7 @@ class Products extends Component {
                             products.map((item, index) => (
                                 <ProductItem
                                     key={item.id}
+                                    id={item.id}
                                     num={++index}
                                     name={item.name}
                                     price={item.price}

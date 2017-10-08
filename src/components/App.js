@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router';
 
 import Header from './Header';
-import Invoices from './Invoices';
-import InvoiceEdit from './InvoiceEdit';
-import Products from './Products';
-import Customers from './Customers';
+import Invoices from './Invoices/Invoices';
+import InvoiceEdit from './Invoices/InvoiceEdit';
+import Products from './Products/Products';
+import Customers from './Customers/Customers';
 
 class App extends Component {
     render() {
