@@ -2,8 +2,27 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { PageHeader, Grid, Button, Table } from 'react-bootstrap';
 
+import api from '../api';
+import InvoiceItem from './InvoiceItem';
+
 class Invoices extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            invoices: []
+        };
+    }
+
+    componentDidMount() {
+        api.getInvoices().then(response => {
+            this.setState({
+                invoices: response
+            });
+        });
+    }
+
     render() {
+        const { invoices } = this.state;
         return (
             <Grid>
                 <PageHeader>
@@ -15,21 +34,22 @@ class Invoices extends Component {
                         <tr>
                             <th width="5%">#</th>
                             <th width="35%">Customer</th>
-                            <th width="25%">Discount</th>
-                            <th width="25%">Total</th>
-                            <th width="10%%" />
+                            <th width="20%">Discount</th>
+                            <th width="20%">Total</th>
+                            <th width="20%" />
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                            <td>
-                                <Button bsStyle="link">edit</Button>
-                            </td>
-                        </tr>
+                        {invoices.length > 0 &&
+                            invoices.map((item, index) => (
+                                <InvoiceItem
+                                    key={item.id}
+                                    num={++index}
+                                    customerId={item.customer_id}
+                                    discount={item.discount}
+                                    total={item.total}
+                                />
+                            ))}
                     </tbody>
                 </Table>
             </Grid>
