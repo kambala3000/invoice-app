@@ -1,9 +1,26 @@
 import React, { Component } from 'react';
+import { Switch, Route } from 'react-router';
 
-class Skeleton extends Component {
+import Header from './Header';
+import Invoices from './Invoices';
+import InvoiceEdit from './InvoiceEdit';
+import Products from './Products';
+import Customers from './Customers';
+
+class App extends Component {
     render() {
-        return <div>1</div>;
+        return (
+            <div>
+                <Header />
+                <Switch>
+                    <Route exact path="/" component={Invoices} />
+                    <Route exact path="/invoices/:invoiceId/edit" component={InvoiceEdit} />
+                    <Route exact path="/products" component={Products} />
+                    <Route exact path="/customers" component={Customers} />
+                </Switch>
+            </div>
+        );
     }
 }
 
-export default Skeleton;
+export default App;
