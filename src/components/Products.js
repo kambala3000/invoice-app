@@ -2,54 +2,55 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { PageHeader, Grid, Button, Table } from 'react-bootstrap';
 
-import api from '../../api';
-import CustomerItem from './CustomerItem';
+import api from '../api';
+import CustomRow from './CustomRow';
 
-class Customers extends Component {
+class Products extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            customers: []
+            products: []
         };
     }
 
     componentDidMount() {
-        document.title = 'Customers';
-        api.getCustomerList().then(response => {
+        document.title = 'Products';
+        api.getProductsList().then(response => {
             this.setState({
-                customers: response
+                products: response
             });
         });
     }
-
     render() {
-        const { customers } = this.state;
+        const { products } = this.state;
         return (
             <Grid>
                 <PageHeader>
-                    <strong>Customer list</strong>
+                    <strong>Product list</strong>
                     <Button className="page-header-btn">Create</Button>
                 </PageHeader>
                 <Table responsive>
                     <thead>
                         <tr>
                             <th width="5%">#</th>
-                            <th width="18%">Name</th>
-                            <th width="38%">Address</th>
-                            <th width="20%">Phone number</th>
-                            <th width="19%" />
+                            <th width="60%">Name</th>
+                            <th width="15%">Price</th>
+                            <th width="20%" />
                         </tr>
                     </thead>
                     <tbody>
-                        {customers.length > 0 &&
-                            customers.map((item, index) => (
-                                <CustomerItem
+                        {products.length > 0 &&
+                            products.map((item, index) => (
+                                <CustomRow
                                     key={item.id}
                                     id={item.id}
                                     num={++index}
-                                    name={item.name}
-                                    address={item.address}
-                                    phone={item.phone}
+                                    data={{
+                                        name: item.name,
+                                        price: item.price
+                                    }}
+                                    editHandler={null}
+                                    deleteHandler={null}
                                 />
                             ))}
                     </tbody>
@@ -59,6 +60,6 @@ class Customers extends Component {
     }
 }
 
-Customers.propTypes = {};
+Products.propTypes = {};
 
-export default Customers;
+export default Products;

@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
 import 'react-select/dist/react-select.css';
-import './components/styles/custom-styles.css';
+import './styles/custom-styles.css';
 
 import App from './components/App';
 
