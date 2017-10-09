@@ -11,6 +11,7 @@ class Customers extends Component {
         this.state = {
             customers: []
         };
+        this.openEditModal = this.openEditModal.bind(this);
     }
 
     componentDidMount() {
@@ -20,6 +21,17 @@ class Customers extends Component {
                 customers: response
             });
         });
+    }
+
+    openEditModal(id, data) {
+        const modalData = {
+            title: 'Edit customer',
+            data,
+            onSave: customerData => {
+                api.editCustomerById(id, customerData);
+            }
+        };
+        this.props.triggerModal(modalData);
     }
 
     render() {
@@ -52,7 +64,7 @@ class Customers extends Component {
                                         address: item.address,
                                         phone: item.phone
                                     }}
-                                    editHandler={null}
+                                    editHandler={this.openEditModal}
                                     deleteHandler={null}
                                 />
                             ))}
@@ -63,6 +75,8 @@ class Customers extends Component {
     }
 }
 
-Customers.propTypes = {};
+Customers.propTypes = {
+    triggerModal: PropTypes.func.isRequired
+};
 
 export default Customers;

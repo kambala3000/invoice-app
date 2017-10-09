@@ -9,6 +9,13 @@ export default {
         return fetch(`${apiPrefix}/api/customers/${id}`).then(response => response.json());
     },
 
+    editCustomerById(id, data) {
+        return fetch(`${apiPrefix}/api/customers/${id}`, {
+            method: 'POST',
+            body: data
+        }).then(response => response.json());
+    },
+
     getProductsList() {
         return fetch(`${apiPrefix}/api/products`).then(response => response.json());
     },

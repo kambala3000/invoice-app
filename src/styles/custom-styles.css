@@ -16,3 +16,7 @@
 .btn-delete {
     color: #e53935;
 }
+
+.custom-modal-btns {
+    text-align: right;
+}
