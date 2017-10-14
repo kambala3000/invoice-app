@@ -1,8 +1,8 @@
-const apiPrefix = 'http://localhost:8000';
+import { API_PREFIX } from './Constants';
 
 export default {
     createCustomer(data) {
-        return fetch(`${apiPrefix}/api/customers`, {
+        return fetch(`${API_PREFIX}/api/customers`, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -13,17 +13,17 @@ export default {
     },
 
     getCustomerList() {
-        return fetch(`${apiPrefix}/api/customers`).then(response => response.json());
+        return fetch(`${API_PREFIX}/api/customers`).then(response => response.json());
     },
 
     getCustomerById(id) {
-        return fetch(`${apiPrefix}/api/customers/${id}`, { method: 'GET' }).then(response =>
+        return fetch(`${API_PREFIX}/api/customers/${id}`, { method: 'GET' }).then(response =>
             response.json()
         );
     },
 
     editCustomerById(id, data) {
-        return fetch(`${apiPrefix}/api/customers/${id}`, {
+        return fetch(`${API_PREFIX}/api/customers/${id}`, {
             method: 'PUT',
             headers: {
                 Accept: 'application/json',
@@ -34,14 +34,6 @@ export default {
     },
 
     deletetCustomerById(id) {
-        return fetch(`${apiPrefix}/api/customers/${id}`, { method: 'DELETE' });
-    },
-
-    getProductsList() {
-        return fetch(`${apiPrefix}/api/products`).then(response => response.json());
-    },
-
-    getInvoices() {
-        return fetch(`${apiPrefix}/api/invoices`).then(response => response.json());
+        return fetch(`${API_PREFIX}/api/customers/${id}`, { method: 'DELETE' });
     }
 };

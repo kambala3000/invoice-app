@@ -20,3 +20,11 @@
 .custom-modal-btns {
     text-align: right;
 }
+
+.modal-body {
+    word-break: break-all;
+}
+
+.table > tbody > tr > td {
+    word-break: break-all;
+}

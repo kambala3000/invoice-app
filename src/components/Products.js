@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { PageHeader, Grid, Button, Table } from 'react-bootstrap';
 
-import api from '../api';
+import api from '../api/products';
 import CustomRow from './CustomRow';
 
 class Products extends Component {
@@ -11,23 +11,81 @@ class Products extends Component {
         this.state = {
             products: []
         };
+        this.getProducts = this.getProducts.bind(this);
+        this.openEditModal = this.openEditModal.bind(this);
+        this.openCreateModal = this.openCreateModal.bind(this);
     }
 
     componentDidMount() {
         document.title = 'Products';
+        this.getProducts();
+    }
+
+    getProducts() {
         api.getProductsList().then(response => {
             this.setState({
                 products: response
             });
         });
     }
+
+    openCreateModal() {
+        const modalData = {
+            title: 'Create product',
+            data: {
+                name: '',
+                price: ''
+            },
+            onSave: (productData, callback) => {
+                api.createProduct(productData).then(() => {
+                    this.getProducts();
+                    callback();
+                });
+            }
+        };
+
+        this.props.customModalHandler(modalData);
+    }
+
+    openEditModal(id, data) {
+        const modalData = {
+            title: 'Edit product',
+            data,
+            onSave: (productData, callback) => {
+                api.editProductById(id, productData).then(() => {
+                    this.getProducts();
+                    callback();
+                });
+            }
+        };
+
+        this.props.customModalHandler(modalData);
+    }
+
+    openDeleteModal(id, itemTitle) {
+        const modalData = {
+            title: 'Delete product',
+            itemTitle,
+            onAccept: callback => {
+                api.deleteProductById(id).then(() => {
+                    this.getProducts();
+                    callback();
+                });
+            }
+        };
+
+        this.props.dialogModalHandler(modalData);
+    }
+
     render() {
         const { products } = this.state;
         return (
             <Grid>
                 <PageHeader>
                     <strong>Product list</strong>
-                    <Button className="page-header-btn">Create</Button>
+                    <Button className="page-header-btn" onClick={this.openCreateModal}>
+                        Create
+                    </Button>
                 </PageHeader>
                 <Table responsive>
                     <thead>
@@ -49,8 +107,12 @@ class Products extends Component {
                                         name: item.name,
                                         price: item.price
                                     }}
-                                    editHandler={null}
-                                    deleteHandler={null}
+                                    editHandler={this.openEditModal}
+                                    deleteHandler={this.openDeleteModal.bind(
+                                        this,
+                                        item.id,
+                                        item.name
+                                    )}
                                 />
                             ))}
                     </tbody>

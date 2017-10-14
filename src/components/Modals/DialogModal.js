@@ -20,6 +20,7 @@ class DialogModal extends Component {
                     <Button onClick={dialogModalHandler}>Close</Button>
                     <Button
                         bsStyle="primary"
+                        autoFocus
                         onClick={() => {
                             onAccept(dialogModalHandler);
                         }}

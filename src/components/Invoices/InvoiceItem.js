@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 
-import api from '../../api';
+import api from '../../api/invoices';
 
 class InvoiceItem extends Component {
     constructor(props) {

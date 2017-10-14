@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { PageHeader, Grid, Button, Table } from 'react-bootstrap';
 
-import api from '../../api';
+import api from '../../api/invoices';
 import InvoiceItem from './InvoiceItem';
 
 class Invoices extends Component {
