@@ -44,13 +44,13 @@ class App extends Component {
                     <Route
                         exact
                         path="/"
-                        render={props => <Invoices dialogModalHandler={this.dialogModalHandler} />}
+                        render={() => <Invoices dialogModalHandler={this.dialogModalHandler} />}
                     />
                     <Route exact path="/invoices/:invoiceId/edit" component={InvoiceEdit} />
                     <Route
                         exact
                         path="/products"
-                        render={props => (
+                        render={() => (
                             <Products
                                 customModalHandler={this.customModalHandler}
                                 dialogModalHandler={this.dialogModalHandler}
@@ -60,7 +60,7 @@ class App extends Component {
                     <Route
                         exact
                         path="/customers"
-                        render={props => (
+                        render={() => (
                             <Customers
                                 customModalHandler={this.customModalHandler}
                                 dialogModalHandler={this.dialogModalHandler}

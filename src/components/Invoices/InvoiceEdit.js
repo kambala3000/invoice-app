@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import {
     PageHeader,
     Grid,
@@ -94,6 +94,6 @@ class InvoiceEdit extends Component {
     }
 }
 
-InvoiceEdit.propTypes = {};
+// InvoiceEdit.propTypes = {};
 
 export default InvoiceEdit;
