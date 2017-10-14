@@ -60,6 +60,9 @@ class Products extends Component {
     }
 }
 
-Products.propTypes = {};
+Products.propTypes = {
+    customModalHandler: PropTypes.func.isRequired,
+    dialogModalHandler: PropTypes.func.isRequired
+};
 
 export default Products;

@@ -8,13 +8,15 @@ class CustomRow extends Component {
         return (
             <tr>
                 <td>{num}</td>
-                {Object.keys(data).map(objKey => <td key={`item${id}.${objKey}`}>{data[objKey]}</td>)}
+                {Object.keys(data).map(objKey => (
+                    <td key={`item${id}.${objKey}`}>{data[objKey]}</td>
+                ))}
                 <td>
                     <ButtonToolbar>
                         <Button onClick={() => editHandler(id, data)} bsStyle="primary">
                             edit
                         </Button>
-                        <Button onClick={() => deleteHandler(id)} bsStyle="danger">
+                        <Button onClick={() => deleteHandler()} bsStyle="danger">
                             delete
                         </Button>
                     </ButtonToolbar>

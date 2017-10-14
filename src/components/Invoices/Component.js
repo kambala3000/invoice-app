@@ -58,6 +58,8 @@ class Invoices extends Component {
     }
 }
 
-Invoices.propTypes = {};
+Invoices.propTypes = {
+    dialogModalHandler: PropTypes.func.isRequired
+};
 
 export default Invoices;

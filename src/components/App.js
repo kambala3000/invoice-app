@@ -6,27 +6,37 @@ import Invoices from './Invoices/Component';
 import InvoiceEdit from './Invoices/InvoiceEdit';
 import Products from './Products';
 import Customers from './Customers';
-import CustomModal from './Modal/Component';
+import CustomModal from './Modals/CustomModal';
+import DialogModal from './Modals/DialogModal';
 
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showModal: false,
+            showCustomModal: false,
+            showDialogModal: false,
             modalData: null
         };
-        this.triggerModal = this.triggerModal.bind(this);
+        this.customModalHandler = this.customModalHandler.bind(this);
+        this.dialogModalHandler = this.dialogModalHandler.bind(this);
     }
 
-    triggerModal(data) {
+    customModalHandler(data) {
         this.setState(prevState => ({
-            showModal: !prevState.showModal,
+            showCustomModal: !prevState.showCustomModal,
+            modalData: data
+        }));
+    }
+
+    dialogModalHandler(data) {
+        this.setState(prevState => ({
+            showDialogModal: !prevState.showDialogModal,
             modalData: data
         }));
     }
 
     render() {
-        const { showModal, modalData } = this.state;
+        const { showCustomModal, showDialogModal, modalData } = this.state;
         return (
             <div>
                 <Header />
@@ -34,21 +44,42 @@ class App extends Component {
                     <Route
                         exact
                         path="/"
-                        render={props => <Invoices triggerModal={this.triggerModal} />}
+                        render={props => <Invoices dialogModalHandler={this.dialogModalHandler} />}
                     />
                     <Route exact path="/invoices/:invoiceId/edit" component={InvoiceEdit} />
                     <Route
                         exact
                         path="/products"
-                        render={props => <Products triggerModal={this.triggerModal} />}
+                        render={props => (
+                            <Products
+                                customModalHandler={this.customModalHandler}
+                                dialogModalHandler={this.dialogModalHandler}
+                            />
+                        )}
                     />
                     <Route
                         exact
                         path="/customers"
-                        render={props => <Customers triggerModal={this.triggerModal} />}
+                        render={props => (
+                            <Customers
+                                customModalHandler={this.customModalHandler}
+                                dialogModalHandler={this.dialogModalHandler}
+                            />
+                        )}
                     />
                 </Switch>
-                {showModal && <CustomModal modalData={modalData} />}
+                {showCustomModal && (
+                    <CustomModal
+                        modalData={modalData}
+                        customModalHandler={this.customModalHandler}
+                    />
+                )}
+                {showDialogModal && (
+                    <DialogModal
+                        modalData={modalData}
+                        dialogModalHandler={this.dialogModalHandler}
+                    />
+                )}
             </div>
         );
     }

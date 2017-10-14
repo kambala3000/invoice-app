@@ -11,11 +11,17 @@ class Customers extends Component {
         this.state = {
             customers: []
         };
+        this.getCustomers = this.getCustomers.bind(this);
         this.openEditModal = this.openEditModal.bind(this);
+        this.openCreateModal = this.openCreateModal.bind(this);
     }
 
     componentDidMount() {
         document.title = 'Customers';
+        this.getCustomers();
+    }
+
+    getCustomers() {
         api.getCustomerList().then(response => {
             this.setState({
                 customers: response
@@ -23,15 +29,53 @@ class Customers extends Component {
         });
     }
 
+    openCreateModal() {
+        const modalData = {
+            title: 'Create customer',
+            data: {
+                name: '',
+                address: '',
+                phone: ''
+            },
+            onSave: (customerData, callback) => {
+                api.createCustomer(customerData).then(() => {
+                    this.getCustomers();
+                    callback();
+                });
+            }
+        };
+
+        this.props.customModalHandler(modalData);
+    }
+
     openEditModal(id, data) {
         const modalData = {
             title: 'Edit customer',
             data,
-            onSave: customerData => {
-                api.editCustomerById(id, customerData);
+            onSave: (customerData, callback) => {
+                api.editCustomerById(id, customerData).then(() => {
+                    this.getCustomers();
+                    callback();
+                });
             }
         };
-        this.props.triggerModal(modalData);
+
+        this.props.customModalHandler(modalData);
+    }
+
+    openDeleteModal(id, itemTitle) {
+        const modalData = {
+            title: 'Delete customer',
+            itemTitle,
+            onAccept: callback => {
+                api.deletetCustomerById(id).then(() => {
+                    this.getCustomers();
+                    callback();
+                });
+            }
+        };
+
+        this.props.dialogModalHandler(modalData);
     }
 
     render() {
@@ -40,7 +84,9 @@ class Customers extends Component {
             <Grid>
                 <PageHeader>
                     <strong>Customer list</strong>
-                    <Button className="page-header-btn">Create</Button>
+                    <Button className="page-header-btn" onClick={this.openCreateModal}>
+                        Create
+                    </Button>
                 </PageHeader>
                 <Table responsive>
                     <thead>
@@ -65,7 +111,11 @@ class Customers extends Component {
                                         phone: item.phone
                                     }}
                                     editHandler={this.openEditModal}
-                                    deleteHandler={null}
+                                    deleteHandler={this.openDeleteModal.bind(
+                                        this,
+                                        item.id,
+                                        item.name
+                                    )}
                                 />
                             ))}
                     </tbody>
@@ -76,7 +126,8 @@ class Customers extends Component {
 }
 
 Customers.propTypes = {
-    triggerModal: PropTypes.func.isRequired
+    customModalHandler: PropTypes.func.isRequired,
+    dialogModalHandler: PropTypes.func.isRequired
 };
 
 export default Customers;

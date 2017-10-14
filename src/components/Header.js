@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 
 class Header extends Component {
@@ -31,7 +29,5 @@ class Header extends Component {
         );
     }
 }
-
-Header.propTypes = {};
 
 export default Header;
