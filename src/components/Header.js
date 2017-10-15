@@ -14,7 +14,7 @@ class Header extends Component {
                         </Navbar.Brand>
                     </Navbar.Header>
                     <Nav>
-                        <NavItem eventKey={1} href="/">
+                        <NavItem eventKey={1} href="/invoices">
                             Invoices
                         </NavItem>
                         <NavItem eventKey={2} href="/products">

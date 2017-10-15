@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router';
 
 import Header from './Header';
 import Invoices from './Invoices/Component';
-import InvoiceEdit from './Invoices/InvoiceEdit';
+import InvoiceForm from './Invoices/InvoiceForm';
 import Products from './Products';
 import Customers from './Customers';
 import CustomModal from './Modals/CustomModal';
@@ -43,10 +43,19 @@ class App extends Component {
                 <Switch>
                     <Route
                         exact
-                        path="/"
+                        path="/invoices"
                         render={() => <Invoices dialogModalHandler={this.dialogModalHandler} />}
                     />
-                    <Route exact path="/invoices/:invoiceId/edit" component={InvoiceEdit} />
+                    <Route
+                        exact
+                        path="/invoices/:invoiceId/edit"
+                        render={() => <InvoiceForm title="Edit invoice" />}
+                    />
+                    <Route
+                        exact
+                        path="/invoices/create"
+                        render={() => <InvoiceForm title="Create invoice" history={history} />}
+                    />
                     <Route
                         exact
                         path="/products"

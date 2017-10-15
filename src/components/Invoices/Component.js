@@ -14,6 +14,11 @@ class Invoices extends Component {
     }
 
     componentDidMount() {
+        document.title = 'Invoices';
+        this.getInvoices();
+    }
+
+    getInvoices() {
         api.getInvoices().then(response => {
             this.setState({
                 invoices: response
@@ -27,7 +32,9 @@ class Invoices extends Component {
             <Grid>
                 <PageHeader>
                     <strong>Invoice list</strong>
-                    <Button className="page-header-btn">Create</Button>
+                    <Button className="page-header-btn" href="/invoices/create">
+                        Create
+                    </Button>
                 </PageHeader>
                 <Table responsive>
                     <thead>
