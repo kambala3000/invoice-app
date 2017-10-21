@@ -1,3 +1,7 @@
+#app-root {
+    padding-left: calc(100vw - 100%);
+}
+
 .page-header-btn {
     margin-left: 20px;
 }
@@ -27,4 +31,22 @@
 
 .table > tbody > tr > td {
     word-break: break-all;
+}
+
+.invoice-form-products tbody td:last-child {
+    text-align: center;
+}
+
+.container .jumbotron {
+    background-color: transparent;
+    padding-right: 130px;
+    padding-left: 130px;
+}
+
+.container .jumbotron h1 {
+    margin-bottom: 20px;
+}
+
+.container .jumbotron p {
+    margin-bottom: 15px;
 }

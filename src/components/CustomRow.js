@@ -14,10 +14,10 @@ class CustomRow extends Component {
                 <td>
                     <ButtonToolbar>
                         <Button onClick={() => editHandler(id, data)} bsStyle="primary">
-                            edit
+                            Edit
                         </Button>
                         <Button onClick={() => deleteHandler()} bsStyle="danger">
-                            delete
+                            &times;
                         </Button>
                     </ButtonToolbar>
                 </td>

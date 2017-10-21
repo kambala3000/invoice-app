@@ -11,6 +11,7 @@ class Invoices extends Component {
         this.state = {
             invoices: []
         };
+        this.onDelete = this.onDelete.bind(this);
     }
 
     componentDidMount() {
@@ -24,6 +25,10 @@ class Invoices extends Component {
                 invoices: response
             });
         });
+    }
+
+    onDelete(id) {
+        console.log(id);
     }
 
     render() {
@@ -48,16 +53,19 @@ class Invoices extends Component {
                     </thead>
                     <tbody>
                         {invoices.length > 0 &&
-                            invoices.map((item, index) => (
-                                <InvoiceItem
-                                    key={item.id}
-                                    id={item.id}
-                                    num={++index}
-                                    customerId={item.customer_id}
-                                    discount={item.discount}
-                                    total={item.total}
-                                />
-                            ))}
+                            invoices
+                                .map((item, index) => (
+                                    <InvoiceItem
+                                        key={item.id}
+                                        id={item.id}
+                                        num={invoices.length - index}
+                                        customerId={item.customer_id}
+                                        discount={item.discount}
+                                        total={item.total}
+                                        onDelete={this.onDelete}
+                                    />
+                                ))
+                                .reverse()}
                     </tbody>
                 </Table>
             </Grid>

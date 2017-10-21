@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 
-import api from '../../api/invoices';
+import api from '../../api/customers';
 
 class InvoiceItem extends Component {
     constructor(props) {
@@ -19,7 +19,7 @@ class InvoiceItem extends Component {
     }
 
     render() {
-        const { num, discount, total } = this.props;
+        const { id, num, discount, total, onDelete } = this.props;
         return (
             <tr>
                 <td>{num}</td>
@@ -28,8 +28,10 @@ class InvoiceItem extends Component {
                 <td>{total}</td>
                 <td>
                     <ButtonToolbar>
-                        <Button bsStyle="primary">edit</Button>
-                        <Button bsStyle="danger">delete</Button>
+                        <Button bsStyle="primary">Edit</Button>
+                        <Button bsStyle="danger" onClick={() => onDelete(id)}>
+                            &times;
+                        </Button>
                     </ButtonToolbar>
                 </td>
             </tr>
@@ -41,7 +43,8 @@ InvoiceItem.propTypes = {
     id: PropTypes.number.isRequired,
     customerId: PropTypes.number.isRequired,
     discount: PropTypes.number.isRequired,
-    total: PropTypes.number.isRequired
+    total: PropTypes.number.isRequired,
+    onDelete: PropTypes.func.isRequired
 };
 
 export default InvoiceItem;

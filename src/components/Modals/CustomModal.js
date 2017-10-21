@@ -36,7 +36,7 @@ class CustomModal extends Component {
                                         autoFocus={index === 0}
                                         value={this.state[objKey]}
                                         onChange={e => this.setState({ [objKey]: e.target.value })}
-                                        required={index === 0}
+                                        required
                                         onFocus={
                                             index === 0
                                                 ? e => {

@@ -98,23 +98,25 @@ class Products extends Component {
                     </thead>
                     <tbody>
                         {products.length > 0 &&
-                            products.map((item, index) => (
-                                <CustomRow
-                                    key={item.id}
-                                    id={item.id}
-                                    num={++index}
-                                    data={{
-                                        name: item.name,
-                                        price: item.price
-                                    }}
-                                    editHandler={this.openEditModal}
-                                    deleteHandler={this.openDeleteModal.bind(
-                                        this,
-                                        item.id,
-                                        item.name
-                                    )}
-                                />
-                            ))}
+                            products
+                                .map((item, index) => (
+                                    <CustomRow
+                                        key={item.id}
+                                        id={item.id}
+                                        num={products.length - index}
+                                        data={{
+                                            name: item.name,
+                                            price: item.price
+                                        }}
+                                        editHandler={this.openEditModal}
+                                        deleteHandler={this.openDeleteModal.bind(
+                                            this,
+                                            item.id,
+                                            item.name
+                                        )}
+                                    />
+                                ))
+                                .reverse()}
                     </tbody>
                 </Table>
             </Grid>

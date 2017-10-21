@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router';
 
 import Header from './Header';
+import Greetings from './Greetings';
 import Invoices from './Invoices/Component';
 import InvoiceForm from './Invoices/InvoiceForm';
 import Products from './Products';
@@ -41,6 +42,7 @@ class App extends Component {
             <div>
                 <Header />
                 <Switch>
+                    <Route exact path="/" component={Greetings} />
                     <Route
                         exact
                         path="/invoices"

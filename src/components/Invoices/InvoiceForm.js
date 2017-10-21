@@ -32,9 +32,11 @@ class InvoiceForm extends Component {
         this.addProduct = this.addProduct.bind(this);
         this.filterProductsOptions = this.filterProductsOptions.bind(this);
         this.calcSum = this.calcSum.bind(this);
+        this.onProductRemove = this.onProductRemove.bind(this);
     }
 
     componentDidMount() {
+        document.title = this.props.title;
         customersApi.getCustomerList().then(response => {
             this.setState({ customers: response });
         });
@@ -92,11 +94,22 @@ class InvoiceForm extends Component {
     }
 
     calcSum() {
+        const { choosenProducts, discount } = this.state;
         let sum = 0;
-        this.state.choosenProducts.forEach(item => {
+        choosenProducts.forEach(item => {
             sum += item.quantity * item.price;
         });
-        return sum;
+        if (discount) {
+            return (sum - sum / 100 * discount).toFixed(2);
+        }
+        return sum.toFixed(2);
+    }
+
+    onProductRemove(id) {
+        console.log(id);
+        this.setState(prevState => ({
+            choosenProducts: prevState.choosenProducts.filter(item => item.id !== id)
+        }));
     }
 
     render() {
@@ -120,6 +133,7 @@ class InvoiceForm extends Component {
                         className="page-header-btn"
                         bsStyle="success"
                         onClick={this.saveInvoice}
+                        disabled={customerId === null || choosenProducts.length === 0}
                     >
                         Save
                     </Button>
@@ -186,13 +200,17 @@ class InvoiceForm extends Component {
                         </FormGroup>
                     </Col>
                     <Col xs={6} md={4}>
-                        <Button className="product-add-btn" onClick={this.addProduct}>
+                        <Button
+                            className="product-add-btn"
+                            onClick={this.addProduct}
+                            disabled={productId === null}
+                        >
                             Add
                         </Button>
                     </Col>
                 </Row>
 
-                <Table responsive>
+                <Table responsive className="invoice-form-products">
                     <thead>
                         <tr>
                             <th width="35%">Name</th>
@@ -229,7 +247,14 @@ class InvoiceForm extends Component {
                                             }}
                                         />
                                     </td>
-                                    <td />
+                                    <td>
+                                        <Button
+                                            bsStyle="danger"
+                                            onClick={() => this.onProductRemove(product.id)}
+                                        >
+                                            &times;
+                                        </Button>
+                                    </td>
                                 </tr>
                             ))}
                     </tbody>

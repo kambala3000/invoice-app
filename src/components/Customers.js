@@ -100,24 +100,26 @@ class Customers extends Component {
                     </thead>
                     <tbody>
                         {customers.length > 0 &&
-                            customers.map((item, index) => (
-                                <CustomRow
-                                    key={item.id}
-                                    id={item.id}
-                                    num={++index}
-                                    data={{
-                                        name: item.name,
-                                        address: item.address,
-                                        phone: item.phone
-                                    }}
-                                    editHandler={this.openEditModal}
-                                    deleteHandler={this.openDeleteModal.bind(
-                                        this,
-                                        item.id,
-                                        item.name
-                                    )}
-                                />
-                            ))}
+                            customers
+                                .map((item, index) => (
+                                    <CustomRow
+                                        key={item.id}
+                                        id={item.id}
+                                        num={customers.length - index}
+                                        data={{
+                                            name: item.name,
+                                            address: item.address,
+                                            phone: item.phone
+                                        }}
+                                        editHandler={this.openEditModal}
+                                        deleteHandler={this.openDeleteModal.bind(
+                                            this,
+                                            item.id,
+                                            item.name
+                                        )}
+                                    />
+                                ))
+                                .reverse()}
                     </tbody>
                 </Table>
             </Grid>
