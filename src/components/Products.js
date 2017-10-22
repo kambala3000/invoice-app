@@ -14,6 +14,7 @@ class Products extends Component {
         this.getProducts = this.getProducts.bind(this);
         this.openEditModal = this.openEditModal.bind(this);
         this.openCreateModal = this.openCreateModal.bind(this);
+        this.openDeleteModal = this.openDeleteModal.bind(this);
     }
 
     componentDidMount() {
@@ -109,11 +110,7 @@ class Products extends Component {
                                             price: item.price
                                         }}
                                         editHandler={this.openEditModal}
-                                        deleteHandler={this.openDeleteModal.bind(
-                                            this,
-                                            item.id,
-                                            item.name
-                                        )}
+                                        deleteHandler={this.openDeleteModal}
                                     />
                                 ))
                                 .reverse()}

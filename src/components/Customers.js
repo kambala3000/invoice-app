@@ -14,6 +14,7 @@ class Customers extends Component {
         this.getCustomers = this.getCustomers.bind(this);
         this.openEditModal = this.openEditModal.bind(this);
         this.openCreateModal = this.openCreateModal.bind(this);
+        this.openDeleteModal = this.openDeleteModal.bind(this);
     }
 
     componentDidMount() {
@@ -112,11 +113,7 @@ class Customers extends Component {
                                             phone: item.phone
                                         }}
                                         editHandler={this.openEditModal}
-                                        deleteHandler={this.openDeleteModal.bind(
-                                            this,
-                                            item.id,
-                                            item.name
-                                        )}
+                                        deleteHandler={this.openDeleteModal}
                                     />
                                 ))
                                 .reverse()}

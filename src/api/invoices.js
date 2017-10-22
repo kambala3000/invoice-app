@@ -61,6 +61,12 @@ export default {
         });
     },
 
+    deleteInvoiceById(id) {
+        return fetch(`${API_PREFIX}/api/invoices/${id}`, {
+            method: 'DELETE'
+        });
+    },
+
     deleteInvoiceItemById(invoiceId, itemId) {
         return fetch(`${API_PREFIX}/api/invoices/${invoiceId}/items/${itemId}`, {
             method: 'DELETE'

@@ -28,7 +28,12 @@ class Invoices extends Component {
     }
 
     onDelete(id) {
-        console.log(id);
+        api.getInvoiceItemsById(id).then(response => {
+            response.forEach(item => {
+                api.deleteInvoiceItemById(id, item.id);
+            });
+        });
+        api.deleteInvoiceById(id).then(() => this.getInvoices());
     }
 
     render() {
