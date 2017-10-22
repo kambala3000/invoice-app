@@ -14,7 +14,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, '/public/'),
         filename: 'index.bundle.js',
-        publicPath: ''
+        publicPath: '/'
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -26,7 +26,9 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('production')
+            'process.env': {
+                NODE_ENV: JSON.stringify('production')
+            }
         })
     ],
     module: {

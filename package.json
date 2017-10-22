@@ -4,7 +4,8 @@
     "private": true,
     "scripts": {
         "start": "node server.js",
-        "build": "webpack --config webpack.production.config.js"
+        "build":
+            "webpack --config webpack.production.config.js && set NODE_ENV=production&& node server.js"
     },
     "dependencies": {
         "babel-runtime": "^6.3.19",
