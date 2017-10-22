@@ -34,7 +34,7 @@ class InvoiceItem extends Component {
                         >
                             Edit
                         </Button>
-                        <Button bsStyle="danger" onClick={() => onDelete(id)}>
+                        <Button bsStyle="danger" onClick={() => onDelete(id, `Invoice '${id}`)}>
                             &times;
                         </Button>
                     </ButtonToolbar>

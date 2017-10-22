@@ -11,7 +11,7 @@ class Invoices extends Component {
         this.state = {
             invoices: []
         };
-        this.onDelete = this.onDelete.bind(this);
+        this.openDeleteModal = this.openDeleteModal.bind(this);
     }
 
     componentDidMount() {
@@ -34,6 +34,26 @@ class Invoices extends Component {
             });
         });
         api.deleteInvoiceById(id).then(() => this.getInvoices());
+    }
+
+    openDeleteModal(id, itemTitle) {
+        const modalData = {
+            title: 'Delete invoice',
+            itemTitle,
+            onAccept: callback => {
+                api.getInvoiceItemsById(id).then(response => {
+                    response.forEach(item => {
+                        api.deleteInvoiceItemById(id, item.id);
+                    });
+                });
+                api.deleteInvoiceById(id).then(() => {
+                    this.getInvoices();
+                    callback();
+                });
+            }
+        };
+
+        this.props.dialogModalHandler(modalData);
     }
 
     render() {
@@ -67,7 +87,7 @@ class Invoices extends Component {
                                         customerId={item.customer_id}
                                         discount={item.discount}
                                         total={item.total}
-                                        onDelete={this.onDelete}
+                                        onDelete={this.openDeleteModal}
                                     />
                                 ))
                                 .reverse()}
