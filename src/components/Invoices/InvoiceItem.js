@@ -28,7 +28,12 @@ class InvoiceItem extends Component {
                 <td>{total}</td>
                 <td>
                     <ButtonToolbar>
-                        <Button bsStyle="primary">Edit</Button>
+                        <Button
+                            bsStyle="primary"
+                            onClick={() => this.context.router.history.push(`/invoices/${id}/edit`)}
+                        >
+                            Edit
+                        </Button>
                         <Button bsStyle="danger" onClick={() => onDelete(id)}>
                             &times;
                         </Button>
@@ -45,6 +50,10 @@ InvoiceItem.propTypes = {
     discount: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
     onDelete: PropTypes.func.isRequired
+};
+
+InvoiceItem.contextTypes = {
+    router: PropTypes.object
 };
 
 export default InvoiceItem;

@@ -56,7 +56,7 @@ class App extends Component {
                     <Route
                         exact
                         path="/invoices/create"
-                        render={() => <InvoiceForm title="Create invoice" history={history} />}
+                        render={() => <InvoiceForm title="Create invoice" />}
                     />
                     <Route
                         exact
